@@ -13,13 +13,18 @@
 			</uni-card>
 		</view>
 
-		/**
+		<!-- 	/**
 		* v-if：动态创建/销毁 DOM，初始渲染开销较高， 适用内容复杂或包含大量计算/绑定时，避免不必要的渲染。
 		  v-show：始终存在 DOM，切换开销低，适用 需要频繁切换显隐（如选项卡、开关）。
-		*/
+		*/ -->
 		<scroll-view :scroll-top="0" :scroll-y="true" class="content">
 			<uni-card v-if="showContent" title="AI面试" :extra="`${category.text}面试题`">
-				<text class="uni-body">{{content}}</text>
+				<!-- <text class="uni-body">{{content}}</text> -->
+				<view class="container">
+					<!-- 默认用法 直接传入md文本即可 普通md展示-->
+					<zero-markdown-view :markdown="content"></zero-markdown-view>
+				</view>
+				<!-- <zero-markdown-view :markdown="content"></zero-markdown-view> -->
 			</uni-card>
 		</scroll-view>
 
@@ -41,6 +46,7 @@
 </template>
 
 <script setup>
+	
 	/** vue3 响应式编程
 	 *  ref: 用于单一值或简单数据的响应式管理，返回一个包含 value 属性的对象，适合简单场景。
 		reactive: 用于复杂对象的响应式管理，直接返回代理对象，适合管理多个相关属性的状态。
@@ -99,8 +105,8 @@
 		updateStartBtn()
 		Object.assign(category, categories.value[event.detail.value])
 	}
-	
-	function updateStartBtn(){
+
+	function updateStartBtn() {
 		startBtn.show = true
 		//便于回答完 问题后 展示按钮信息
 		startBtn.text = '开始面试'
@@ -109,7 +115,7 @@
 		content.value = ''
 	}
 
-	
+
 	function startInterview() {
 		if (model.name == '请选择AI模型') {
 			uni.showToast({
@@ -142,8 +148,8 @@
 		startBtn.disable = true
 		handleRequest(mpRequest)
 	}
-	
-	function handleAnswer(data){
+
+	function handleAnswer(data) {
 		let mpRequest = {
 			sessionId: uni.getStorageSync('sessionId'),
 			content: data,
@@ -151,7 +157,7 @@
 			subject: subject.value,
 			modelName: model.name
 		}
-		
+
 		uni.showLoading({
 			title: '面试官正在思考'
 		})
@@ -159,8 +165,8 @@
 		startBtn.disable = false
 		handleRequest(mpRequest)
 	}
-	
-	function handleRequest(data){
+
+	function handleRequest(data) {
 		chat(data).then(res => {
 			startBtn.show = !startBtn.show
 			//便于回答完 问题后 展示按钮信息
