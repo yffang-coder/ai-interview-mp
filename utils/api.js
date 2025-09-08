@@ -94,6 +94,13 @@ export const getAllModels = () => {
 	});
 };
 
+export const getAllMenus = () => {
+	return request({
+		url: '/mp/records/menu',
+		method: 'GET'
+	});
+};
+
 export const getAllCategoryItems = (item) => {
 	return request({
 		url: '/mp/categories/' + item,
@@ -109,9 +116,29 @@ export const chat = (data) => {
 	});
 };
 
-export const getAllRecords = (pageNum) => {
+// export const getAllRecords = (subject,pageNum,startTime,endTime) => {
+// 	return request({
+// 		url: '/mp/records?subject=all&pageNum=' + pageNum,
+// 		method: 'GET'
+// 	});
+// };
+
+export const getAllRecords = (subject, category, pageNum, startTime, endTime) => {
+	// 构建 URL，依次添加参数
+	let url = `/mp/records?subject=${encodeURIComponent(subject)}&category=${encodeURIComponent(category)}&pageNum=${pageNum}`;
+
+	// 如果 startTime 存在，添加到 URL
+	if (startTime) {
+		url += `&startTime=${startTime}`;
+	}
+
+	// 如果 endTime 存在，添加到 URL
+	if (endTime) {
+		url += `&endTime=${endTime}`;
+	}
+	console.log(url)
 	return request({
-		url: '/mp/records?subject=all&pageNum=' + pageNum,
+		url: url,
 		method: 'GET'
 	});
 };

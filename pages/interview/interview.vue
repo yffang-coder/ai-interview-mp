@@ -46,7 +46,6 @@
 </template>
 
 <script setup>
-	
 	/** vue3 响应式编程
 	 *  ref: 用于单一值或简单数据的响应式管理，返回一个包含 value 属性的对象，适合简单场景。
 		reactive: 用于复杂对象的响应式管理，直接返回代理对象，适合管理多个相关属性的状态。
@@ -188,6 +187,10 @@
 		let cate = options.cate
 		subject.value = cate
 		console.log(cate)
+		// 设置导航栏标题
+		uni.setNavigationBarTitle({
+			title: cate + ' 面试' || '面试题目' // 如果 cate 为空，默认显示 '面试题目'
+		});
 		uni.getStorage({
 			key: 'models',
 			success: (res) => {
