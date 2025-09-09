@@ -108,9 +108,24 @@ export const getAllCategoryItems = (item) => {
 	});
 };
 
+export const getAllAnnouncementItems = () => {
+	return request({
+		url: '/mp/announcements',
+		method: 'GET'
+	});
+};
+
 export const chat = (data) => {
 	return request({
 		url: '/mp/chat',
+		method: 'POST',
+		data: data
+	});
+};
+
+export const postSatisfaction = (data) => {
+	return request({
+		url: '/mp/satisfaction',
 		method: 'POST',
 		data: data
 	});

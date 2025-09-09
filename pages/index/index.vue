@@ -1,12 +1,11 @@
 <template>
 	<view class="content">
-		<swiper circular style="height: 240px;" :indicator-dots="indicatorDots" :autoplay="autoplay"
+		<swiper circular style="height: 210px;" :indicator-dots="indicatorDots" :autoplay="autoplay"
 			:interval="interval" :duration="duration">
 			<swiper-item v-for="(banner, index) in banners" :key="index">
 				<image style="width: 100%;background-color: #eeeeee;" :src="banner.image" @click="bannerClick(banner)">
 				</image>
 			</swiper-item>
-
 		</swiper>
 		<uni-grid :column="3" :show-border="true" :square="false" @change="gridItemClick">
 			<uni-grid-item v-for="(cate, index) in categories" :index="index" :key="index">
@@ -20,27 +19,64 @@
 </template>
 
 <style>
-	.text {
-		font-size: 14px;
-		margin-top: 5px;
+	.content {
+		padding: 16px;
+		background-color: #f8f9fa;
 	}
 
-	.image {
-		width: 48px;
-		height: 48px;
-		transform-style: preserve-3d;
+	/* Swiper styles */
+	swiper {
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		margin-bottom: 10px;
 	}
 
+	swiper-item image {
+		width: 100%;
+		height: 240px;
+		object-fit: cover;
+		transition: opacity 0.3s ease;
+	}
+
+	swiper-item image:hover {
+		opacity: 0.95;
+	}
+
+	/* Grid styles */
 	.grid-item-box {
-		flex: 1;
-		display: inline-flex;
-		position: relative;
+		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		padding: 15px 0;
+		padding: 12px;
+		border-radius: 8px;
+		background-color: #ffffff;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.grid-item-box:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+
+	.image {
+		width: 56px;
+		height: 56px;
+		border-radius: 12px;
+		object-fit: cover;
+		margin-bottom: 8px;
+	}
+
+	.text {
+		font-size: 13px;
+		font-weight: 500;
+		color: #333;
+		text-align: center;
+		line-height: 1.4;
 	}
 </style>
+
 <script setup>
 	import {
 		ref
@@ -48,12 +84,10 @@
 	import {
 		getAllBanners,
 		getAllCategories
-	}
-	from "../../utils/api";
+	} from "../../utils/api";
 	import {
 		onLoad
 	} from '@dcloudio/uni-app';
-
 
 	let indicatorDots = ref(true)
 	let autoplay = ref(true)
@@ -89,10 +123,8 @@
 				});
 			}
 		})
-
 	}
 
-	//onLoad 回调函数在页面加载时执行
 	onLoad(() => {
 		uni.getStorage({
 			key: 'banners',
@@ -124,11 +156,6 @@
 				uni.showLoading({
 					title: '数据加载中...'
 				});
-				/**
-				 * Promise 并不是 Vue 3 特有的概念，而是 JavaScript 语言本身提供的一种异步编程工具
-				 * 定义：Promise 是一种表示异步操作结果的对象，可以是成功（resolve）或失败（reject）。它通过 .then() 处理成功结果，.catch() 处理错误。
-				   用法：常用于处理 AJAX 请求、定时器或文件操作等异步任务。
-				 */
 				getAllCategories().then(res => {
 					categories.value = res
 					uni.setStorage({
@@ -140,6 +167,5 @@
 				});
 			}
 		});
-
 	});
 </script>

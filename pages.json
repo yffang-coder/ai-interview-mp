@@ -40,6 +40,13 @@
 			{
 				"navigationBarTitleText" : "面试题详情"
 			}
+		},
+		{
+			"path" : "pages/announcement/announcement",
+			"style" : 
+			{
+				"navigationBarTitleText" : "公告记录"
+			}
 		}
 	],
 	"globalStyle": {
