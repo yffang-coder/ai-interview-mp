@@ -33,17 +33,11 @@ export const request = (options) => {
 										reject)
 								}
 							});
-
-
 						}
 					});
-
 				}
 			});
 		}
-
-
-
 	})
 }
 
@@ -57,7 +51,6 @@ export const handleRequest = (options, resolve, reject) => {
 			//自定义请求头信息
 			'openid': uni.getStorageSync('user_info').openid,
 			'mp_token': uni.getStorageSync('user_info').session_key
-
 		},
 		success: (res) => {
 			return resolve(res.data)
@@ -68,9 +61,7 @@ export const handleRequest = (options, resolve, reject) => {
 		complete: () => {
 			uni.hideLoading()
 		}
-
 	});
-
 }
 
 export const getAllBanners = () => {
@@ -131,16 +122,78 @@ export const postSatisfaction = (data) => {
 	});
 };
 
-// export const getAllRecords = (subject,pageNum,startTime,endTime) => {
-// 	return request({
-// 		url: '/mp/records?subject=all&pageNum=' + pageNum,
-// 		method: 'GET'
-// 	});
-// };
+export const getUserInfo = () => {
+	return request({
+		url: '/mp/userinfo',
+		method: 'GET',
+	});
+};
+
+export const postUserInfo = (data) => {
+	return new Promise((resolve, reject) => {
+		const {
+			username,
+			avatar
+		} = data;
+		//==宽松相等比较自动类型转换适用于不关心类型的场景（不推荐频繁使用）
+		//===严格相等比较无类型转换推荐用于模板、计算属性和逻辑处理，确保可靠性和可预测性
+		if (avatar && (avatar.startsWith('http://tmp') === false || avatar == '../../static/myPage/lion.png')) {
+			// If avatar is a local file path, use uni.uploadFile
+			console.log("本地文件路径" + avatar)
+			uni.request({
+				url: BASE_URL + '/mp/userinfo',
+				method: 'POST',
+				header: {
+					'content-type': 'application/x-www-form-urlencoded',
+					'openid': uni.getStorageSync('user_info').openid,
+					'mp_token': uni.getStorageSync('user_info').session_key
+					
+				},
+				data: {
+					username: username
+				},
+				success: (res) => {
+					resolve(res.data)
+				},
+				fail: (error) => {
+					reject(error);
+				},
+				complete: () => {
+					uni.hideLoading();
+				}
+			});
+		} else {
+			// If no new avatar or avatar is a URL, use regular request
+			uni.uploadFile({
+				url: BASE_URL + '/mp/userinfo',
+				method: 'POST',
+				header: {
+					'content-type': 'application/x-www-form-urlencoded',
+					'openid': uni.getStorageSync('user_info').openid,
+					'mp_token': uni.getStorageSync('user_info').session_key
+				},
+				filePath: avatar, // 临时文件路径
+				name: 'avatar', // 对应后端 @RequestParam("avatar")
+				formData: {
+					username: username // 其他字段
+				},
+				success: (res) => {
+					let a = JSON.parse(res.data)
+					//res是个字符串 需要转化为json obj
+					resolve(a)
+				},
+				fail: (err) => {
+					reject(err)
+				}
+			});
+		}
+	});
+};
 
 export const getAllRecords = (subject, category, pageNum, startTime, endTime) => {
 	// 构建 URL，依次添加参数
-	let url = `/mp/records?subject=${encodeURIComponent(subject)}&category=${encodeURIComponent(category)}&pageNum=${pageNum}`;
+	let url =
+		`/mp/records?subject=${encodeURIComponent(subject)}&category=${encodeURIComponent(category)}&pageNum=${pageNum}`;
 
 	// 如果 startTime 存在，添加到 URL
 	if (startTime) {
