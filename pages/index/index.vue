@@ -157,7 +157,8 @@
 					title: '数据加载中...'
 				});
 				getAllCategories().then(res => {
-					categories.value = res
+					const filtered = res.filter(item => item.enable === true);
+					categories.value = filtered
 					uni.setStorage({
 						key: 'cates',
 						data: res

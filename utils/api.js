@@ -51,7 +51,7 @@ export const handleRequest = (options, resolve, reject) => {
 			'content-type': 'application/json',
 			//自定义请求头信息
 			'openid': uni.getStorageSync('user_info').openid,
-			'mp_token': uni.getStorageSync('user_info').session_key
+			'mp-token': uni.getStorageSync('user_info').session_key
 		},
 		success: (res) => {
 			return resolve(res.data)
@@ -147,7 +147,7 @@ export const postUserInfo = (data) => {
 				header: {
 					'content-type': 'application/x-www-form-urlencoded',
 					'openid': uni.getStorageSync('user_info').openid,
-					'mp_token': uni.getStorageSync('user_info').session_key
+					'mp-token': uni.getStorageSync('user_info').session_key
 					
 				},
 				data: {
@@ -171,7 +171,7 @@ export const postUserInfo = (data) => {
 				header: {
 					'content-type': 'application/x-www-form-urlencoded',
 					'openid': uni.getStorageSync('user_info').openid,
-					'mp_token': uni.getStorageSync('user_info').session_key
+					'mp-token': uni.getStorageSync('user_info').session_key
 				},
 				filePath: avatar, // 临时文件路径
 				name: 'avatar', // 对应后端 @RequestParam("avatar")
