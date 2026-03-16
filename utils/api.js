@@ -1,5 +1,4 @@
-const BASE_URL = 'https://yffxdq.cloud/prod-api'
-//const BASE_URL = 'http://localhost:8080'
+import { BASE_URL } from './config.js'
 export const request = (options) => {
 	return new Promise((resolve, reject) => {
 		let expire_time = uni.getStorageSync('login_expire_time');

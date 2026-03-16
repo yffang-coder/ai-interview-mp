@@ -61,6 +61,7 @@
 import { ref } from 'vue'
 import { onLoad, onUnload } from '@dcloudio/uni-app'
 import { request } from '../../utils/api'
+import { WS_BASE_URL } from '../../utils/config'
 
 const alarms = ref([])
 const loading = ref(false)
@@ -180,9 +181,8 @@ function refreshAlarms() {
 }
 
 function tryConnectSocket() {
-	const BASE = 'https://yffxdq.cloud'
 	// Spring Boot SockJS 默认暴露的原生 WebSocket 路径通常是 /ws/websocket
-	const ws = BASE.replace(/^http/, 'ws') + '/ws/websocket'
+	const ws = WS_BASE_URL.replace(/^http/, 'ws') + '/ws/websocket'
 	
 	try {
 		console.log('正在连接 WebSocket:', ws)

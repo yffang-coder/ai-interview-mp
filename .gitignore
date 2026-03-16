@@ -5,3 +5,6 @@ unpackage/
 *.log
 .DS_Store
 Thumbs.db
+
+# 敏感配置
+utils/config.js
