@@ -36,6 +36,18 @@
 <img width="280" src="./pics/Snipaste_2026-03-13_10-47-44.jpeg" alt="主页" />
 <img width="280" src="./pics/Snipaste_2026-03-13_10-48-38.png" alt="我的页面" />
 <img width="280" src="./pics/Snipaste_2026-03-13_10-48-48.png" alt="面试页面" />
+### 主页
+
+<img width="262" height="561" src="https://github.com/user-attachments/assets/630318fd-7ada-4463-a033-2e08ef10e793" alt="主页" />
+
+### 我的页面
+<img width="263" height="554" src="https://github.com/user-attachments/assets/9e839019-6498-481f-828a-8c7a28eb0937" alt="我的页面" />
+1
+### AI 面试页面
+<img width="272" height="564" src="https://github.com/user-attachments/assets/aec9efec-ba64-476f-bfdc-b8433d20ac66" alt="AI 面试 1" /> <img width="275" height="551" src="https://github.com/user-attachments/assets/f6832e09-988b-433b-ab15-188fbfa8da32" alt="AI 面试 2" />
+
+### AI 面试记录页面
+<img width="247" height="553" src="https://github.com/user-attachments/assets/baad34bb-a653-4fb2-af0f-0ed4525ae9d8" alt="面试记录 1" /> <img width="264" height="542" src="https://github.com/user-attachments/assets/5a1155cf-6042-4b50-b8ed-4a02a394e82b" alt="面试记录 2" />
 
 ---
 
