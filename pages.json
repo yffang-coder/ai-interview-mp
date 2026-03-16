@@ -47,6 +47,17 @@
 			{
 				"navigationBarTitleText" : "公告记录"
 			}
+		},
+		{
+			"path" : "pages/alarms/alarms",
+			"style" : 
+			{
+				"navigationBarTitleText" : "告警列表",
+				"enablePullDownRefresh": true,
+				"pullDownRefresh": {
+					"offset": 0
+				}
+			}
 		}
 	],
 	"globalStyle": {

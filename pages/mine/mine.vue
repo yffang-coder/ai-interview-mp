@@ -31,6 +31,11 @@
 				<text class="txt">平台公告</text>
 				<image class="right-icon" src="../../static/myPage/arrow.png" mode="aspectFit" />
 			</view>
+			<view class="user-func_item" @click="clickItem('alarms')" hover-class="hover-view">
+				<image class="icon" src="../../static/myPage/announcement.png" mode="aspectFit" />
+				<text class="txt">告警列表</text>
+				<image class="right-icon" src="../../static/myPage/arrow.png" mode="aspectFit" />
+			</view>
 		</view>
 		<view>
 			<!-- 关于弹窗 -->
@@ -573,6 +578,10 @@
 		} else if (item === 'announcement') {
 			uni.navigateTo({
 				url: '/pages/announcement/announcement',
+			});
+		} else if (item === 'alarms') {
+			uni.navigateTo({
+				url: '/pages/alarms/alarms',
 			});
 		}
 	}
